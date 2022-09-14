@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+td {
+  border: 1px solid black;
+  height: 40px;
+  max-width: 30px;
+}
+
+table .keyboard {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  width: 100%;
+  /* border-collapse: separate; */
+  border-spacing: 5px;
+}
+
+table td {
+  border: 1px solid black;
+  height: 60px;    
+  width: 100px;
+  margin: 10px;
+  text-align: center;
+}
+
+#delete {
+  width: 80px;
+}
+
+.keyboard {
+  background-color: gray;
+  border-radius: 6px;
+  color: white;
+}
+
+@media only screen and (min-width: 600px) {
+  .gameGridDisplay {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }  
+  .table {
+    margin: 60px
+  }
+}
