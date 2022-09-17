@@ -7,16 +7,25 @@ function ContextProvider(props) {
     const [array, setArray] = useState([])
     const [object, setObject] = useState()
     const [currentGuess, setCurrentGuess] = useState("")
-    const [currentRow, setCurrentRow] = useState(1)
-    const [gridValues, setGridValues] = useState(["123", "456", '789', '123', '456', '789', '123', '456', '789'])
+    const [currentRow, setCurrentRow] = useState(0)
+    const [gridValues, setGridValues] = useState(["", "", '', '', '', '', '', '', ''])
+    const [answers, setAnswers] = useState(['', '', ''])
+    const [wordList, setWordList] = useState([])
 
     //this will need to be changed once server route name is decided
-    // React.useEffect(() => {
-    //     fetch('/renameItem')
-    //         .then(response => response.json())
-    //         .then(data => setArray(data))
-    //         .catch(err => console.log(err))
-    // })
+    React.useEffect(() => {
+        fetch('/wordlist')
+            .then(response => response.json())
+            .then(data => {
+                setWordList(data[0].wordArray)
+                const wordOne = data[0].wordArray[Math.floor(data[0].wordArray.length * Math.random())]
+                const wordTwo = data[0].wordArray[Math.floor(data[0].wordArray.length * Math.random())]
+                const wordThree = data[0].wordArray[Math.floor(data[0].wordArray.length * Math.random())]
+                setAnswers([wordOne.toUpperCase(), wordTwo.toUpperCase(), wordThree.toUpperCase()])
+            })
+            // .then(data => console.log(data[0].wordArray))
+            .catch(err => console.log(err))
+    }, [])
 
     return(
         <Context.Provider value={{
@@ -26,7 +35,9 @@ function ContextProvider(props) {
             currentRow,
             setCurrentRow,
             gridValues,
-            setGridValues
+            setGridValues,
+            answers,
+            wordList
         }}    
         >
             {props.children}

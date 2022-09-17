@@ -17,14 +17,12 @@ function App() {
     <ContextProvider>
       <Router>
         <nav>
-          <Link to='/'>Home</Link>
-          <Link to='/game'>Game</Link>
-          <Link to='/highscores'>High Scores</Link>
-          <Link to='/about'>About</Link>
-          <select>
-            <option value="light">Light Theme</option>
-            <option value="dark">Dark Theme</option>
-          </select>
+          <div className='navBox'>
+            <Link to='/'>Home</Link>
+            <Link to='/game'>Game</Link>
+            <Link to='/highscores'>High Scores</Link>
+            <Link to='/about'>About</Link>
+          </div>
         </nav>
 
         <Routes>

@@ -1,59 +1,91 @@
-import React from "react";
+import React, { useState } from "react";
 import { Context } from "../context";
 
-export default function GameGrid() {
+export default function GameGrid(props) {
 
-    const {currentGuess, gridValues} = React.useContext(Context)
-    const { currentRow, setCurrentRow } = React.useContext(Context)
+    const {currentGuess, gridValues, answers, currentRow, setCurrentRow} = React.useContext(Context)
+
+    const neutralStyle = {backgroundColor: "white"}
+    const absentStyle = {backgroundColor: "rgb(159, 167, 173)"}
+    const correctStyle = {backgroundColor: "rgb(55, 150, 52)"}
+    const wrongPlacementStyle = {backgroundColor: "rgb(246, 249, 48)"}
+
+    function tableCell(rowNum, colNum) {
+        if (currentRow > rowNum) {
+            if (gridValues[rowNum][colNum].toUpperCase() === answers[props.gridNum][colNum].toUpperCase()) {
+                return <td style={correctStyle}>{gridValues[rowNum][colNum]}</td>
+            } else if (gridValues[rowNum][colNum].toUpperCase() === answers[props.gridNum][0].toUpperCase()){
+                return <td style={wrongPlacementStyle}>{gridValues[rowNum][colNum]}</td>
+            } else if (gridValues[rowNum][colNum].toUpperCase() === answers[props.gridNum][1].toUpperCase()){
+                return <td style={wrongPlacementStyle}>{gridValues[rowNum][colNum]}</td>
+            } else if (gridValues[rowNum][colNum].toUpperCase() === answers[props.gridNum][2].toUpperCase()){
+                return <td style={wrongPlacementStyle}>{gridValues[rowNum][colNum]}</td>
+            } else if (gridValues[rowNum][colNum].toUpperCase() !== answers[props.gridNum][colNum].toUpperCase()) {
+                return <td style={absentStyle}>{gridValues[rowNum][colNum]}</td>
+            } else {
+                return <td style={wrongPlacementStyle}>{gridValues[rowNum][colNum]}</td>
+            }
+        } else if (currentRow === rowNum) {
+            return <td style={{backgroundColor: "rgb(227, 242, 253)"}}>{currentGuess[colNum]}</td>
+        } else {
+            return <td style={{backgroundColor: "rgb(227, 242, 253)"}}>{gridValues[rowNum][colNum]}</td>
+        }
+    }
 
     return(
-        <table className="table">
-            <tr>
-                <td>{currentRow === 1? currentGuess[0] : gridValues[0][0]}</td>
-                <td>{currentRow === 1? currentGuess[1] : gridValues[0][1]}</td>
-                <td>{currentRow === 1? currentGuess[2] : gridValues[0][2]}</td>
-            </tr>
-            <tr>
-                <td>{currentRow === 2? currentGuess[0] : gridValues[1][0]}</td>
-                <td>{currentRow === 2? currentGuess[1] : gridValues[1][1]}</td>
-                <td>{currentRow === 2? currentGuess[2] : gridValues[1][2]}</td>
-            </tr>
-            <tr>
-                <td>{currentRow === 3 ? currentGuess[0] : gridValues[2][0]}</td>  
-                <td>{currentRow === 3 ? currentGuess[1] : gridValues[2][1]}</td>
-                <td>{currentRow === 3 ? currentGuess[2] : gridValues[2][2]}</td>
-            </tr>
-            <tr>
-                <td>{currentRow === 4? currentGuess[0] : gridValues[3][0]}</td>
-                <td>{currentRow === 4? currentGuess[1] : gridValues[3][1]}</td>
-                <td>{currentRow === 4? currentGuess[2] : gridValues[3][2]}</td>
-            </tr>
-            <tr>
-                <td>{currentRow === 5? currentGuess[0] : gridValues[4][0]}</td>
-                <td>{currentRow === 5? currentGuess[1] : gridValues[4][1]}</td>
-                <td>{currentRow === 5? currentGuess[2] : gridValues[4][2]}</td>
-            </tr>
-            <tr>
-                <td>{currentRow === 6? currentGuess[0] : gridValues[5][0]}</td>
-                <td>{currentRow === 6? currentGuess[1] : gridValues[5][1]}</td>
-                <td>{currentRow === 6? currentGuess[2] : gridValues[5][2]}</td>
-            </tr>
-            <tr>
-                <td>{currentRow === 7? currentGuess[0] : gridValues[6][0]}</td>
-                <td>{currentRow === 7? currentGuess[1] : gridValues[6][1]}</td>
-                <td>{currentRow === 7? currentGuess[2] : gridValues[6][2]}</td>
-            </tr>
-            <tr>
-                <td>{currentRow === 8? currentGuess[0] : gridValues[7][0]}</td>
-                <td>{currentRow === 8? currentGuess[1] : gridValues[7][1]}</td>
-                <td>{currentRow === 8? currentGuess[2] : gridValues[7][2]}</td>
-            </tr>
-            <tr>
-                <td>{currentRow === 9? currentGuess[0] : gridValues[8][0]}</td>
-                <td>{currentRow === 9? currentGuess[1] : gridValues[8][1]}</td>
-                <td>{currentRow === 9? currentGuess[2] : gridValues[8][2]}</td>
-            </tr>
-            
-        </table>
+        <>
+            {/* <button onClick={()=>console.log(`current Row: ${currentRow} `)}>current row</button> */}
+            <table className="grids">
+                <tbody>
+                    <tr>
+                        {tableCell(0, 0)}
+                        {tableCell(0, 1)}
+                        {tableCell(0, 2)}
+                    </tr>
+                    <tr>
+                        {tableCell(1, 0)}
+                        {tableCell(1, 1)}
+                        {tableCell(1, 2)}
+                    </tr>
+                    <tr>
+                        {tableCell(2, 0)}
+                        {tableCell(2, 1)}
+                        {tableCell(2, 2)}
+                    </tr>
+                    <tr>
+                        {tableCell(3, 0)}
+                        {tableCell(3, 1)}
+                        {tableCell(3, 2)}
+                    </tr>
+                    {/* <tr>
+                        {tableCell(4, 0)}
+                        {tableCell(4, 1)}
+                        {tableCell(4, 2)}
+                    </tr>
+                    <tr>
+                        {tableCell(5, 0)}
+                        {tableCell(5, 1)}
+                        {tableCell(5, 2)}
+                    </tr>
+                    <tr>
+                        {tableCell(6, 0)}
+                        {tableCell(6, 1)}
+                        {tableCell(6, 2)}
+                    </tr>
+                    <tr>
+                        {tableCell(7, 0)}
+                        {tableCell(7, 1)}
+                        {tableCell(7, 2)}
+                    </tr>
+                    <tr>
+                        {tableCell(8, 0)}
+                        {tableCell(8, 1)}
+                        {tableCell(8, 2)}
+                    </tr> */}
+                </tbody>
+                
+            </table>
+        
+        </>
     )
 }

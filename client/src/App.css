@@ -2,27 +2,74 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+}
+body {
+  background-color: rgb(52, 89, 149);
+}
+nav {
+  color: white;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(13, 23, 38)
+}
+.navBox {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  box-shadow: 0 0 10px white;
+  background-color: rgb(227, 242, 253)
+
+}
+h1 {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+h1 {
+  font-size: 60px;
+  margin: 10px auto 0px;
+  text-align: center;
+  letter-spacing: .5rem;
 }
 
-td {
-  border: 1px solid black;
-  height: 40px;
-  max-width: 30px;
-}
-
-table .keyboard {
+.keyboard {
   display: block;
   margin-left: auto;
   margin-right: auto;
   align-items: center;
-  width: 100%;
-  /* border-collapse: separate; */
+  width: 350px;
   border-spacing: 5px;
+  text-align: center;
 }
-
-table td {
+.keyboard td {
   border: 1px solid black;
-  height: 60px;    
+  height: 40px;
+  width: 60px;
+  font-weight: bold
+}
+/* 
+.keyboard tr {
+  margin: 0 auto;
+} */
+.gameGridDisplay {
+  width: 100%;
+}  
+.grids {
+  width: 100px;
+  margin: 10px
+}
+.gridsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 0 auto
+}
+.grids td {
+  border: 1px solid black;
+  height: 40px;    
   width: 100px;
   margin: 10px;
   text-align: center;
@@ -39,11 +86,8 @@ table td {
 }
 
 @media only screen and (min-width: 600px) {
-  .gameGridDisplay {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-  }  
-  .table {
+
+  .grids {
     margin: 60px
   }
 }
