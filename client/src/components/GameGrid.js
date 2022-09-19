@@ -36,6 +36,9 @@ export default function GameGrid(props) {
         <>
             {/* <button onClick={()=>console.log(`current Row: ${currentRow} `)}>current row</button> */}
             <table className="grids">
+                <col width="30px" />
+                <col width="30px" />
+                <col width="30px" />
                 <tbody>
                     <tr>
                         {tableCell(0, 0)}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Context } from "../context";
 
 export default function Keyboard() {
@@ -6,6 +6,13 @@ export default function Keyboard() {
     const {currentGuess, setCurrentGuess, currentRow, setCurrentRow, answers, gridValues, setGridValues, wordList} = React.useContext(Context)
 
     const [count, setCount] = React.useState(0)
+
+    const theAlphabet = ['a', 'b', 'c', 'd' , 'e' , 'f' , `g` , `h` , `i` , `j` , `k` , `l` , `m` , `n` , `o` , `p` , `q` , `r` , `s` , `t` , `u` , `v` , `w` , `x` , `y` , `z`]
+
+    // console.log(theAlphabet.findIndex(letter => letter === 'a'))
+    // console.log(theAlphabet.findIndex(letter => letter === 'q'))
+    // console.log(theAlphabet.findIndex(letter => letter === 'g'))
+    // console.log(theAlphabet.findIndex(letter => letter === 'd'))
 
     function handleClick(e) {
         if (currentGuess.length < 3) {
@@ -18,18 +25,44 @@ export default function Keyboard() {
         setCurrentGuess(toDeleteString.slice(0, -1))
     }
 
-    function endGame() {
+    // function endGame() {
         
+    // }
+
+    // useEffect(()=> {
+
+    // }, [currentGuess])
+
+    const detectKeyDown = (e) => {
+        console.log(e.key)
+        if (e.key === '`') {
+            console.log(count)
+        }
+        if (e.key === 'Enter') {
+            console.log(currentGuess)
+            handleSubmit()
+        }
+        if ( e.key === 'Backspace') {
+            handleDelete()
+        }
+        if (currentGuess.length < 3 && theAlphabet.findIndex(letter => letter === e.key) > -1 ) {
+            setCurrentGuess(prevState => prevState + e.key.toUpperCase())
+        }
     }
+
+    document.addEventListener('keydown', detectKeyDown)
+    
     function handleSubmit() {
+        console.log(currentGuess)
         const found = wordList.findIndex(word => word === currentGuess.toLowerCase())
         // if the guess appears in word list run this
-        setGridValues(prevState => {
-            const newGridValues = prevState
-            newGridValues[currentRow] = currentGuess
-            return newGridValues
-        })
+        
         if (found > -1) {
+            setGridValues(prevState => {
+                const newGridValues = prevState
+                newGridValues[currentRow] = currentGuess
+                return newGridValues
+            })
             if (answers.findIndex(word => word === currentGuess.toUpperCase()) > -1 && gridValues.findIndex(word => word === currentGuess.toUpperCase())) {
                         setCount(prevCount => prevCount + 1)
             }
@@ -106,7 +139,11 @@ export default function Keyboard() {
             <button onClick={()=>console.log(gridValues.findIndex(word => word === answers[1].toUpperCase()))}>gridValues.findIndex(word = word === answers[1].toUpperCase())</button>
             <button onClick={()=>console.log(gridValues.findIndex(word => word === answers[2].toUpperCase()))}>gridValues.findIndex(word = word === answers[2].toUpperCase())</button>
             <button onClick={()=>setCount(prev => prev + 1)}>increase count</button>
-            <button onClick={()=>console.log(count)}>count</button>
+            <button onClick={()=>console.log(currentGuess)}>currentGuess</button>
+            <button onClick={()=>console.log(currentGuess.length)}>currentGuess.length</button>
+            <button onClick={()=>console.log(wordList)}>wordList</button>
+            <button onClick={()=>console.log(gridValues)}>gridValues</button>
+            <button onClick={()=>console.log(currentGuess.toLowerCase())}>currentGuess.toLowerCase</button>
             
         </>
     )
