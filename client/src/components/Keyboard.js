@@ -3,19 +3,45 @@ import { Context } from "../context";
 
 export default function Keyboard() {
 
-    const {currentGuess, setCurrentGuess, currentRow, setCurrentRow, answers, gridValues, setGridValues, wordList} = React.useContext(Context)
+    const {
+        currentGuess,
+        setCurrentGuess, 
+        currentRow, 
+        setCurrentRow, 
+        answers, 
+        gridValues, 
+        setGridValues, 
+        wordList, 
+        count, 
+        setCount
+    } = React.useContext(Context)
 
-    const [count, setCount] = React.useState(0)
 
     const theAlphabet = ['a', 'b', 'c', 'd' , 'e' , 'f' , `g` , `h` , `i` , `j` , `k` , `l` , `m` , `n` , `o` , `p` , `q` , `r` , `s` , `t` , `u` , `v` , `w` , `x` , `y` , `z`]
 
-    // console.log(theAlphabet.findIndex(letter => letter === 'a'))
-    // console.log(theAlphabet.findIndex(letter => letter === 'q'))
-    // console.log(theAlphabet.findIndex(letter => letter === 'g'))
-    // console.log(theAlphabet.findIndex(letter => letter === 'd'))
+    // if you want the keys to change color based on guesses
+    // function keyStyle(letter) {
+    //     if ()
+    // }
+
+    // trying https://github.com/facebook/react/issues/15815 solution
+//     Also you can put keyPressHandler function inside useEffect body and use setTest to getting previous state not from closure, but from second form with callback.
+
+//   const [text, setText] = useState('');
+ 
+//   useEffect(() => {
+//     const keyPressHandler = (e) => {
+//       setText((text) => text + e.key);
+//     };
+
+//     document.addEventListener('keydown', keyPressHandler);
+//     return () => {
+//       document.removeEventListener('keydown', keyPressHandler);
+//     };
+//   }, []);
 
     function handleClick(e) {
-        if (currentGuess.length < 3) {
+        if (currentGuess.length < 3 && count < 3) {
             setCurrentGuess(prevState => prevState + e.target.id.toUpperCase())
         }
     }
@@ -25,49 +51,50 @@ export default function Keyboard() {
         setCurrentGuess(toDeleteString.slice(0, -1))
     }
 
-    // function endGame() {
-        
-    // }
+    // https://stackoverflow.com/questions/67537943/react-function-unaware-of-state-when-called-from-keydown-event
+    // there's a more reacty way ^^^
+    useEffect(()=> {
+        // this listener is made on page render and every time currentGuess changes
+        document.addEventListener('keydown', detectKeyDown)
+        // by including the next line of code, the duplicate listener is deleted
+        // and the new listener has the updated value of currentGuess
+        return ()=> document.removeEventListener('keydown', detectKeyDown)
+    }, [currentGuess])
 
-    // useEffect(()=> {
-
-    // }, [currentGuess])
-
-    const detectKeyDown = (e) => {
-        console.log(e.key)
-        if (e.key === '`') {
-            console.log(count)
-        }
-        if (e.key === 'Enter') {
-            console.log(currentGuess)
-            handleSubmit()
-        }
-        if ( e.key === 'Backspace') {
-            handleDelete()
-        }
-        if (currentGuess.length < 3 && theAlphabet.findIndex(letter => letter === e.key) > -1 ) {
-            setCurrentGuess(prevState => prevState + e.key.toUpperCase())
-        }
-    }
-
-    document.addEventListener('keydown', detectKeyDown)
+    
     
     function handleSubmit() {
-        console.log(currentGuess)
+        
         const found = wordList.findIndex(word => word === currentGuess.toLowerCase())
         // if the guess appears in word list run this
         
         if (found > -1) {
+            if (currentGuess.length === 3) {
+                setCurrentRow(prevRow => prevRow + 1)
+                setCurrentGuess("")
+            }
+            if (answers.findIndex(word => word === currentGuess.toUpperCase()) > -1 && gridValues.findIndex(word => word === currentGuess.toUpperCase())) {
+                        setCount(prevCount => prevCount + 1)
+                        if (count === 2) {
+                            // setCurrentRow(prevRow => prevRow + 1)
+                            // setCurrentGuess("")
+                            setGridValues(prevState => {
+                                const newGridValues = prevState
+                                newGridValues[currentRow] = currentGuess
+                                return newGridValues
+                            })
+                            return alert('Congratulations! You guessed all three words')
+                        }
+            }
+            // put request will need to go here
+            
             setGridValues(prevState => {
                 const newGridValues = prevState
                 newGridValues[currentRow] = currentGuess
                 return newGridValues
             })
-            if (answers.findIndex(word => word === currentGuess.toUpperCase()) > -1 && gridValues.findIndex(word => word === currentGuess.toUpperCase())) {
-                        setCount(prevCount => prevCount + 1)
-            }
-            if (currentRow === 2) {
-                if (count === 3) {
+            if (currentRow === 8) {
+                if (count >= 3) {
                     alert('grats')
                 } else if (count > 0 && count < 3) {
                     alert('very close')
@@ -77,15 +104,25 @@ export default function Keyboard() {
                 }
             }
             //if the guess is 3 letters long run this
-            if (currentGuess.length === 3) {
-                setCurrentRow(prevRow => prevRow + 1)
-                setCurrentGuess("")
-            }
-        } else {
-            alert("Guess must be on the word list and contain 3 letters.")
+
         }
     }
+    const detectKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            // console.log('Enter was keyed')
+            handleSubmit()
+        }
+        if ( e.key === 'Backspace') {
+            handleDelete()
+        }
+        if (currentGuess.length < 3  && theAlphabet.findIndex(letter => letter === e.key) > -1 && count < 3) {
+            setCurrentGuess(prevState => prevState + e.key.toUpperCase())
+        }
+    }
+    console.log(currentGuess)
 
+    
+    
     return(
         <>
             <table className="keyboard">

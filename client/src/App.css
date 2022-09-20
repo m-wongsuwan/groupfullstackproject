@@ -5,7 +5,7 @@
 
 }
 body {
-  background-color: rgb(52, 89, 149);
+  background-color: rgb(16, 46, 74);
 }
 nav {
   color: white;
@@ -25,17 +25,52 @@ nav a {
   background-color: rgb(227, 242, 253)
 
 }
-h1 {
+
+.home form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 0px
+}
+.home form input, .home form button{
+  height: 60px;
+}
+.home form input {
+  font-size: 30px;
+  text-align: center;
+  border-radius: 10px 0px 0px 10px;
+}
+.home form button {
+  width: 100px;
+  font-size: 20px;
+  border-radius: 0px 10px 10px 0px;
+}
+.about {
+  background-color: rgb(208, 213, 221);
+  width: 70%;
+  margin: 15px auto;
+  padding: 20px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+h1, h2 {
   color: white;
   font-family: Arial, Helvetica, sans-serif;
-}
-h1 {
-  font-size: 60px;
-  margin: 10px auto 0px;
   text-align: center;
   letter-spacing: .5rem;
 }
-
+h1 {
+  text-shadow: 0px 0px  5px rgb(163, 173, 189);
+  font-size: 60px;
+  margin: 10px auto 0px;
+}
+h2 {
+  font-size: 40px;
+}
+.home {
+  text-align: center;
+}
 .keyboard {
   display: block;
   margin-left: auto;

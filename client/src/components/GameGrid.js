@@ -3,15 +3,33 @@ import { Context } from "../context";
 
 export default function GameGrid(props) {
 
-    const {currentGuess, gridValues, answers, currentRow, setCurrentRow} = React.useContext(Context)
+    const {currentGuess, gridValues, answers, currentRow} = React.useContext(Context)
 
     const neutralStyle = {backgroundColor: "white"}
-    const absentStyle = {backgroundColor: "rgb(159, 167, 173)"}
-    const correctStyle = {backgroundColor: "rgb(55, 150, 52)"}
-    const wrongPlacementStyle = {backgroundColor: "rgb(246, 249, 48)"}
+    const absentStyle = {backgroundColor: "rgb(163, 173, 189)"}
+    const correctStyle = {backgroundColor: "rgb(79, 173, 96)"}
+    const wrongPlacementStyle = {backgroundColor: "rgb(245, 217, 42)"}
 
     function tableCell(rowNum, colNum) {
-        if (currentRow > rowNum) {
+        if (gridValues.findIndex(guess => guess === answers[props.gridNum]) > -1) {
+            if (rowNum <= gridValues.findIndex(guess => guess === answers[props.gridNum]) ){
+                if (gridValues[rowNum][colNum].toUpperCase() === answers[props.gridNum][colNum].toUpperCase()) {
+                    return <td style={correctStyle}>{gridValues[rowNum][colNum]}</td>
+                } else if (gridValues[rowNum][colNum].toUpperCase() === answers[props.gridNum][0].toUpperCase()){
+                    return <td style={wrongPlacementStyle}>{gridValues[rowNum][colNum]}</td>
+                } else if (gridValues[rowNum][colNum].toUpperCase() === answers[props.gridNum][1].toUpperCase()){
+                    return <td style={wrongPlacementStyle}>{gridValues[rowNum][colNum]}</td>
+                } else if (gridValues[rowNum][colNum].toUpperCase() === answers[props.gridNum][2].toUpperCase()){
+                    return <td style={wrongPlacementStyle}>{gridValues[rowNum][colNum]}</td>
+                } else if (gridValues[rowNum][colNum].toUpperCase() !== answers[props.gridNum][colNum].toUpperCase()) {
+                    return <td style={absentStyle}>{gridValues[rowNum][colNum]}</td>
+                } else {
+                    return <td style={wrongPlacementStyle}>{gridValues[rowNum][colNum]}</td>
+                }
+            } else {
+                return <td style={{backgroundColor: "rgb(227, 242, 253)"}}></td>
+            }
+        } else if (currentRow > rowNum) {
             if (gridValues[rowNum][colNum].toUpperCase() === answers[props.gridNum][colNum].toUpperCase()) {
                 return <td style={correctStyle}>{gridValues[rowNum][colNum]}</td>
             } else if (gridValues[rowNum][colNum].toUpperCase() === answers[props.gridNum][0].toUpperCase()){
@@ -36,9 +54,9 @@ export default function GameGrid(props) {
         <>
             {/* <button onClick={()=>console.log(`current Row: ${currentRow} `)}>current row</button> */}
             <table className="grids">
+                {/* <col width="30px" />
                 <col width="30px" />
-                <col width="30px" />
-                <col width="30px" />
+                <col width="30px" /> */}
                 <tbody>
                     <tr>
                         {tableCell(0, 0)}
@@ -60,7 +78,7 @@ export default function GameGrid(props) {
                         {tableCell(3, 1)}
                         {tableCell(3, 2)}
                     </tr>
-                    {/* <tr>
+                    <tr>
                         {tableCell(4, 0)}
                         {tableCell(4, 1)}
                         {tableCell(4, 2)}
@@ -84,7 +102,7 @@ export default function GameGrid(props) {
                         {tableCell(8, 0)}
                         {tableCell(8, 1)}
                         {tableCell(8, 2)}
-                    </tr> */}
+                    </tr>
                 </tbody>
                 
             </table>

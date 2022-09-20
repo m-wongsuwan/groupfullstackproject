@@ -3,14 +3,15 @@ import React, { useState } from "react";
 const Context = React.createContext()
 
 function ContextProvider(props) {
-    const [currentUser, setCurrentUser] = useState("New User")
+    const [currentUser, setCurrentUser] = useState("")
     const [array, setArray] = useState([])
     const [object, setObject] = useState()
     const [currentGuess, setCurrentGuess] = useState("")
     const [currentRow, setCurrentRow] = useState(0)
-    const [gridValues, setGridValues] = useState(["", "", '', '', '', '', '', '', ''])
+    const [gridValues, setGridValues] = useState(["   ", "   ", '   ', '   ', '   ', '   ', '   ', '   ', '   '])
     const [answers, setAnswers] = useState(['', '', ''])
     const [wordList, setWordList] = useState([])
+    const [count, setCount] = React.useState(0)
 
     //this will need to be changed once server route name is decided
     React.useEffect(() => {
@@ -30,6 +31,7 @@ function ContextProvider(props) {
     return(
         <Context.Provider value={{
             currentUser,
+            setCurrentUser,
             currentGuess,
             setCurrentGuess,
             currentRow,
@@ -37,7 +39,9 @@ function ContextProvider(props) {
             gridValues,
             setGridValues,
             answers,
-            wordList
+            wordList,
+            count,
+            setCount
         }}    
         >
             {props.children}

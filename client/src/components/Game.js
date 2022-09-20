@@ -5,11 +5,11 @@ import { Context } from "../context";
 
 export default function Game() {
 
-    const { answers } = React.useContext(Context)
+    const { answers, count } = React.useContext(Context)
 
     return(
         <div className="game" >
-            <p>{answers}</p>
+            {/* <p>{answers}</p> */}
             <h1>Shortdle</h1>
             <div className="gameGridDisplay">
                 <div className="gridsContainer">

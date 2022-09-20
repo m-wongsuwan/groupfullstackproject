@@ -4,9 +4,8 @@ import { Context } from "../context";
 
 export default function Home() {
     
-    const { currentUser } = React.useContext(Context)
-    const [userName, setUserName] = useState(currentUser)
-    const [userInput, setUserInput] = useState({ userName: "", key: ""})
+    const { currentUser, setCurrentUser } = React.useContext(Context)
+    const [userInput, setUserInput] = useState({ userName: ""})
 
     function handleChange(e) {
         const { name, value } = e.target
@@ -20,19 +19,28 @@ export default function Home() {
 
     function handleSubmit(e) {
         e.preventDefault()
-        setUserName(userInput.userName)
-        setUserInput({ userName: "", key: ""})
+        setUserInput({ userName: userInput.userName })
+        setCurrentUser(userInput.userName)
     }
 
     return(
         <div className="home">
-            <h1>Welcome {userName}</h1>
+            <h1>Welcome {currentUser}</h1>
             <form onSubmit={handleSubmit}>
                 <input name="userName" placeholder="Enter Handle" value={userInput.userName} onChange={handleChange} />
-                <input name="key" placeholder="Enter Key" value={userInput.key} onChange={handleChange} />
                 <button>Log In</button>
                 
             </form>
+            <h2>What is Shortdle?</h2>
+            <div className="about">
+                <p>
+                    Shortdle is a word game that tests your knowledge of English and powers of deduction.
+                </p>
+                <br></br>
+                <p>
+                    You'll have nine guesses to guess three three-letter words. Every time you complete a Shortdle in nine guesses or less, you get a point on the leaderboard!
+                </p>
+            </div>
         </div>
     )
 }

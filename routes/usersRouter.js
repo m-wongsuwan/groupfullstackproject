@@ -1,9 +1,9 @@
 const express = require('express')
-const renameItemRouter = express.Router()
-const renameItem = require('../models/renameItem')
+const usersRouter = express.Router()
+const user = require('../models/user')
 
-renameItemRouter.get('/', (req, res, next) => {
-    renameItem.find((err, items)=>{
+usersRouter.get('/', (req, res, next) => {
+    user.find((err, items)=>{
         if(err){
             res.status(500)
             return next(err)
@@ -12,9 +12,9 @@ renameItemRouter.get('/', (req, res, next) => {
     })
 })
 
-renameItemRouter.get('/:itemId', (req, res, next) =>{
-    renameItem.findOne(
-        { _id: req.params.itemId },
+usersRouter.get('/:userId', (req, res, next) =>{
+    user.findOne(
+        { _id: req.params.userId },
         (err, item) =>{
             if(err){
                 res.status(500)
@@ -25,8 +25,8 @@ renameItemRouter.get('/:itemId', (req, res, next) =>{
     )  
 })
 
-renameItemRouter.post('/', (req, res, next) =>{
-    const newItem = new renameItem(req.body)
+usersRouter.post('/', (req, res, next) =>{
+    const newItem = new user(req.body)
     newItem.save((err, updatedItem) =>{
         if(err){
             res.status(500)
@@ -36,9 +36,9 @@ renameItemRouter.post('/', (req, res, next) =>{
     })
 })
 
-renameItemRouter.delete('/:itemId', (req, res, next) =>{
-    renameItem.findOneAndDelete(
-        { _id: req.params.itemId },
+usersRouter.delete('/:userId', (req, res, next) =>{
+    user.findOneAndDelete(
+        { _id: req.params.userId },
         (err, deletedItem) =>{
             if(err){
                 res.status(500)
@@ -49,9 +49,9 @@ renameItemRouter.delete('/:itemId', (req, res, next) =>{
     )
 })
 
-renameItemRouter.put('/:itemId', (req, res, next) =>{
-    renameItem.findOneAndUpdate(
-        { _id: req.params.itemId },
+usersRouter.put('/:userId', (req, res, next) =>{
+    user.findOneAndUpdate(
+        { _id: req.params.userId },
         req.body,
         { new: true },
         (err, updatedItem) => {
@@ -64,4 +64,4 @@ renameItemRouter.put('/:itemId', (req, res, next) =>{
     )
 })
 
-module.exports = renameItemRouter
+module.exports = usersRouter
