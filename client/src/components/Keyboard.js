@@ -20,9 +20,25 @@ export default function Keyboard() {
     const theAlphabet = ['a', 'b', 'c', 'd' , 'e' , 'f' , `g` , `h` , `i` , `j` , `k` , `l` , `m` , `n` , `o` , `p` , `q` , `r` , `s` , `t` , `u` , `v` , `w` , `x` , `y` , `z`]
 
     // if you want the keys to change color based on guesses
-    // function keyStyle(letter) {
-    //     if ()
-    // }
+    const absentStyle = {backgroundColor: "black"}
+    const correctStyle = {backgroundColor: "rgb(79, 173, 96)"}
+    function keyCell(letter) {
+        if (answers[0].indexOf(letter) > -1 || answers[1].indexOf(letter) > -1 || answers[2].indexOf(letter) > -1) {
+            if (gridValues[0].indexOf(letter) > -1 || gridValues[1].indexOf(letter) > -1 || gridValues[2].indexOf(letter) > -1 || gridValues[3].indexOf(letter) > -1 || gridValues[4].indexOf(letter) > -1 || gridValues[5].indexOf(letter) > -1 || gridValues[6].indexOf(letter) > -1 || gridValues[7].indexOf(letter) > -1 || gridValues[8].indexOf(letter) > -1 ) {
+                return <td style={correctStyle} onClick={handleClick} id={letter.toLowerCase()}>{letter}</td>
+            } else {
+                return <td onClick={handleClick} id={letter.toLowerCase()}>{letter}</td>
+            }
+        } else if (answers[0].indexOf(letter) === -1 && answers[1].indexOf(letter) === -1 && answers[2].indexOf(letter) === -1) {
+            if (gridValues[0].indexOf(letter) > -1 || gridValues[1].indexOf(letter) > -1 || gridValues[2].indexOf(letter) > -1 || gridValues[3].indexOf(letter) > -1 || gridValues[4].indexOf(letter) > -1 || gridValues[5].indexOf(letter) > -1 || gridValues[6].indexOf(letter) > -1 || gridValues[7].indexOf(letter) > -1 || gridValues[8].indexOf(letter) > -1 ) {
+                return <td style={absentStyle} onClick={handleClick} id={letter.toLowerCase()}>{letter}</td>
+            } else {
+                return <td onClick={handleClick} id={letter.toLowerCase()}>{letter}</td>
+            }
+        } else {
+            return <td onClick={handleClick} id={letter.toLowerCase()}>{letter}</td>
+        }
+    }
 
     // trying https://github.com/facebook/react/issues/15815 solution
 //     Also you can put keyPressHandler function inside useEffect body and use setTest to getting previous state not from closure, but from second form with callback.
@@ -119,7 +135,6 @@ export default function Keyboard() {
             setCurrentGuess(prevState => prevState + e.key.toUpperCase())
         }
     }
-    console.log(currentGuess)
 
     
     
@@ -128,31 +143,33 @@ export default function Keyboard() {
             <table className="keyboard">
                 <tbody>
                     <tr>
-                        <td onClick={handleClick} id="q">Q</td>
-                        <td onClick={handleClick} id="w">W</td>
-                        <td onClick={handleClick} id="e">E</td>
-                        <td onClick={handleClick} id="r">R</td>
-                        <td onClick={handleClick} id="t">T</td>
-                        <td onClick={handleClick} id="y">Y</td>
-                        <td onClick={handleClick} id="u">U</td>
-                        <td onClick={handleClick} id="i">I</td>
-                        <td onClick={handleClick} id="o">O</td>
-                        <td onClick={handleClick} id="p">P</td>
+
+                        {keyCell("Q")}
+                        {keyCell("W")}
+                        {keyCell("E")}
+                        {keyCell("R")}
+                        {keyCell("T")}
+                        {keyCell("Y")}
+                        {keyCell("U")}
+                        {keyCell("O")}
+                        {keyCell("I")}
+                        {keyCell("P")}
+
                     </tr>
                 </tbody>
             </table>
             <table className="keyboard">
                 <tbody>
                     <tr>
-                        <td onClick={handleClick} id="a">A</td>
-                        <td onClick={handleClick} id="s">S</td>
-                        <td onClick={handleClick} id="d">D</td>
-                        <td onClick={handleClick} id="f">F</td>
-                        <td onClick={handleClick} id="g">G</td>
-                        <td onClick={handleClick} id="h">H</td>
-                        <td onClick={handleClick} id="j">J</td>
-                        <td onClick={handleClick} id="k">K</td>
-                        <td onClick={handleClick} id="l">L</td>
+                        {keyCell("A")}
+                        {keyCell("S")}
+                        {keyCell("D")}
+                        {keyCell("F")}
+                        {keyCell("G")}
+                        {keyCell("H")}
+                        {keyCell("J")}
+                        {keyCell("K")}
+                        {keyCell("L")}
                     </tr>
                 </tbody>
             </table>
@@ -160,13 +177,13 @@ export default function Keyboard() {
                 <tbody>
                     <tr>
                         <td onClick={handleSubmit} className="bigButtons" id="enter">ENTER</td>
-                        <td onClick={handleClick} id="z">Z</td>
-                        <td onClick={handleClick} id="x">X</td>
-                        <td onClick={handleClick} id="c">C</td>
-                        <td onClick={handleClick} id="v">V</td>
-                        <td onClick={handleClick} id="b">B</td>
-                        <td onClick={handleClick} id="n">N</td>
-                        <td onClick={handleClick} id="m">M</td>
+                        {keyCell("Z")}
+                        {keyCell("X")}
+                        {keyCell("C")}
+                        {keyCell("V")}
+                        {keyCell("B")}
+                        {keyCell("N")}
+                        {keyCell("M")}
                         <td onClick={handleDelete} className="bigButtons" id="delete">DELETE</td>
                     </tr>
                 </tbody>
@@ -181,6 +198,9 @@ export default function Keyboard() {
             <button onClick={()=>console.log(wordList)}>wordList</button>
             <button onClick={()=>console.log(gridValues)}>gridValues</button>
             <button onClick={()=>console.log(currentGuess.toLowerCase())}>currentGuess.toLowerCase</button>
+            <button onClick={()=>console.log(answers)}>answers</button>
+            <button onClick={()=>console.log(answers[0].indexOf('C') > -1)}>answers[0].indexOf('C') > -1</button>
+
             
         </>
     )

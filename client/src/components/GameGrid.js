@@ -5,7 +5,6 @@ export default function GameGrid(props) {
 
     const {currentGuess, gridValues, answers, currentRow} = React.useContext(Context)
 
-    const neutralStyle = {backgroundColor: "white"}
     const absentStyle = {backgroundColor: "rgb(163, 173, 189)"}
     const correctStyle = {backgroundColor: "rgb(79, 173, 96)"}
     const wrongPlacementStyle = {backgroundColor: "rgb(245, 217, 42)"}

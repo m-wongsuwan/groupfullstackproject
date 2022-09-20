@@ -34,7 +34,7 @@ export default function Home() {
             <h2>What is Shortdle?</h2>
             <div className="about">
                 <p>
-                    Shortdle is a word game that tests your knowledge of English and powers of deduction.
+                    Shortdle is a word game that tests your powers of deduction and knowledge of English.
                 </p>
                 <br></br>
                 <p>
