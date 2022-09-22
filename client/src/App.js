@@ -7,7 +7,7 @@ import {
 } from "react-router-dom"
 import Home from './components/Home';
 import Game from './components/Game';
-import About from './components/About';
+// import About from './components/About';
 import HighScores from './components/HighScores';
 import { ContextProvider } from './context';
 
@@ -22,13 +22,13 @@ function App() {
             <Link to='/'>Home</Link>
             <Link to='/game'>Game</Link>
             <Link to='/highscores'>High Scores</Link>
-            <Link to='/about'>About</Link>
+            {/* <Link to='/about'>About</Link> */}
           </div>
         </nav>
 
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/about' element={<About />} />
+          {/* <Route path='/about' element={<About />} /> */}
           <Route path='/game' element={<Game />} />
           <Route path='/highscores' element={<HighScores />} />
         </Routes>

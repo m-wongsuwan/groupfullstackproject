@@ -4,17 +4,32 @@ const Context = React.createContext()
 
 function ContextProvider(props) {
     const [currentUser, setCurrentUser] = useState("")
-    const [array, setArray] = useState([])
-    const [object, setObject] = useState()
     const [currentGuess, setCurrentGuess] = useState("")
     const [currentRow, setCurrentRow] = useState(0)
     const [gridValues, setGridValues] = useState(["   ", "   ", '   ', '   ', '   ', '   ', '   ', '   ', '   '])
     const [answers, setAnswers] = useState(['', '', ''])
     const [wordList, setWordList] = useState([])
     const [count, setCount] = React.useState(0)
+    const [toggleGameCompleted,  setToggleGameCompleted] = useState(false)
+    const [userList, setUserList] = useState([])
 
-    //this will need to be changed once server route name is decided
-    React.useEffect(() => {
+    function reset() {
+        setCurrentGuess("")    
+        setCurrentRow(0)
+        setGridValues(["   ", "   ", '   ', '   ', '   ', '   ', '   ', '   ', '   '])
+        newAnswers()
+        setCount(0)
+        setToggleGameCompleted(false)
+    }
+
+    React.useEffect(()=>{
+        fetch('/users')
+            .then(response => response.json())
+            .then(data => setUserList(data))
+            .catch(err => console.log(err))
+    }, [])
+
+    function newAnswers() {
         fetch('/wordlist')
             .then(response => response.json())
             .then(data => {
@@ -26,7 +41,14 @@ function ContextProvider(props) {
             })
             // .then(data => console.log(data[0].wordArray))
             .catch(err => console.log(err))
+    }
+
+
+    React.useEffect(() => {
+        newAnswers()
     }, [])
+
+
 
     return(
         <Context.Provider value={{
@@ -41,7 +63,12 @@ function ContextProvider(props) {
             answers,
             wordList,
             count,
-            setCount
+            setCount,
+            toggleGameCompleted,
+            setToggleGameCompleted,
+            userList,
+            setUserList,
+            reset
         }}    
         >
             {props.children}

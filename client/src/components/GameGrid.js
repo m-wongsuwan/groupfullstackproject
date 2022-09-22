@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Context } from "../context";
 
 export default function GameGrid(props) {
@@ -51,6 +51,7 @@ export default function GameGrid(props) {
 
     return(
         <>
+            
             {/* <button onClick={()=>console.log(`current Row: ${currentRow} `)}>current row</button> */}
             <table className="grids">
                 {/* <col width="30px" />

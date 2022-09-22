@@ -13,14 +13,15 @@ export default function Keyboard() {
         setGridValues, 
         wordList, 
         count, 
-        setCount
+        setCount,
+        setToggleGameCompleted
     } = React.useContext(Context)
 
 
     const theAlphabet = ['a', 'b', 'c', 'd' , 'e' , 'f' , `g` , `h` , `i` , `j` , `k` , `l` , `m` , `n` , `o` , `p` , `q` , `r` , `s` , `t` , `u` , `v` , `w` , `x` , `y` , `z`]
 
     // if you want the keys to change color based on guesses
-    const absentStyle = {backgroundColor: "black"}
+    const absentStyle = {backgroundColor: "rgb(55, 55, 55)"}
     const correctStyle = {backgroundColor: "rgb(79, 173, 96)"}
     function keyCell(letter) {
         if (answers[0].indexOf(letter) > -1 || answers[1].indexOf(letter) > -1 || answers[2].indexOf(letter) > -1) {
@@ -99,10 +100,10 @@ export default function Keyboard() {
                                 newGridValues[currentRow] = currentGuess
                                 return newGridValues
                             })
-                            return alert('Congratulations! You guessed all three words')
+                            setToggleGameCompleted(true)
+                            // return alert('Congratulations! You guessed all three words')
                         }
             }
-            // put request will need to go here
             
             setGridValues(prevState => {
                 const newGridValues = prevState
@@ -110,6 +111,7 @@ export default function Keyboard() {
                 return newGridValues
             })
             if (currentRow === 8) {
+                setToggleGameCompleted(true)
                 if (count >= 3) {
                     alert('grats')
                 } else if (count > 0 && count < 3) {
@@ -125,13 +127,13 @@ export default function Keyboard() {
     }
     const detectKeyDown = (e) => {
         if (e.key === 'Enter') {
-            // console.log('Enter was keyed')
             handleSubmit()
         }
         if ( e.key === 'Backspace') {
             handleDelete()
         }
         if (currentGuess.length < 3  && theAlphabet.findIndex(letter => letter === e.key) > -1 && count < 3) {
+            console.log('a letter was pressed')
             setCurrentGuess(prevState => prevState + e.key.toUpperCase())
         }
     }
@@ -140,7 +142,9 @@ export default function Keyboard() {
     
     return(
         <>
+        {console.log(answers)}
             <table className="keyboard">
+                
                 <tbody>
                     <tr>
 
@@ -189,17 +193,7 @@ export default function Keyboard() {
                 </tbody>
             </table>
             <h3>{count}</h3>
-            <button onClick={()=>console.log(gridValues.findIndex(word => word === answers[0].toUpperCase()))}>gridValues.findIndex(word = word === answers[0].toUpperCase())</button>
-            <button onClick={()=>console.log(gridValues.findIndex(word => word === answers[1].toUpperCase()))}>gridValues.findIndex(word = word === answers[1].toUpperCase())</button>
-            <button onClick={()=>console.log(gridValues.findIndex(word => word === answers[2].toUpperCase()))}>gridValues.findIndex(word = word === answers[2].toUpperCase())</button>
-            <button onClick={()=>setCount(prev => prev + 1)}>increase count</button>
-            <button onClick={()=>console.log(currentGuess)}>currentGuess</button>
-            <button onClick={()=>console.log(currentGuess.length)}>currentGuess.length</button>
-            <button onClick={()=>console.log(wordList)}>wordList</button>
-            <button onClick={()=>console.log(gridValues)}>gridValues</button>
-            <button onClick={()=>console.log(currentGuess.toLowerCase())}>currentGuess.toLowerCase</button>
-            <button onClick={()=>console.log(answers)}>answers</button>
-            <button onClick={()=>console.log(answers[0].indexOf('C') > -1)}>answers[0].indexOf('C') > -1</button>
+
 
             
         </>

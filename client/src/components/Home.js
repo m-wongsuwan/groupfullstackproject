@@ -39,6 +39,10 @@ export default function Home() {
                 <br></br>
                 <p>
                     You'll have nine guesses to guess three three-letter words. Every time you complete a Shortdle in nine guesses or less, you get a point on the leaderboard!
+                </p>                
+                <br></br>
+                <p>
+                    Answers come from the Scrabble list of legal three-letter words.
                 </p>
             </div>
         </div>

@@ -71,12 +71,23 @@ h2 {
 .home {
   text-align: center;
 }
+.gameCompleteBox {
+  text-align: center;
+}
+.gameCompleteBox--answerDisplay {
+  display: flex;
+  justify-content: center;
+}
+.gameCompleteBox--answerDisplay h2{
+  padding: 10px;
+
+}
 .keyboard {
   display: block;
   margin-left: auto;
   margin-right: auto;
   align-items: center;
-  width: 350px;
+  width: 80%;
   border-spacing: 5px;
   text-align: center;
 }
@@ -86,6 +97,7 @@ h2 {
   width: 60px;
   font-weight: bold
 }
+
 /* 
 .keyboard tr {
   margin: 0 auto;
@@ -105,7 +117,7 @@ h2 {
   margin: 0 auto
 }
 .grids td {
-  border: 1px solid black;
+  border: 3px solid rgb(78, 78, 78);
   height: 40px;    
   max-width: 100px;
   margin: 10px;
@@ -124,6 +136,55 @@ h2 {
   color: white;
 }
 
-@media only screen and (min-width: 600px) {
+.listDiv {
+  width: 300px;
+  margin: 30px auto;
+  background-color: white;
+  text-align: center;
+  list-style: none;
+  border-radius: 5px;
+  font-size: 22px;
+}
+.listDiv ul {
+  list-style: none;
+}
+footer {
+  /* display: flex; */
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  /* background-color: rgb(227, 242, 253); */
+  width: 100%;
+  text-align: right;
+  height: 30px;
+}
+footer button {
+  padding: 3px;
+  margin-right: 3px
+}
+.highScores li {
+  padding: 10px;
+}
 
+@media only screen and (min-width: 600px) {
+  .keyboard {
+    width: 450px;
+    border-spacing: 5px;
+  }
+  .keyboard td {
+    height: 40px;
+    width: 60px;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .keyboard td {
+    height: 50px;
+    width: 70px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .keyboard td {
+    width: 80px;
+  }
 }
