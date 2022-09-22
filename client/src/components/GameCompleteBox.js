@@ -63,18 +63,19 @@ export default function GameCompleteBox() {
 
     return(
         <div className="gameCompleteBox">
-            
+
+            <div className="gameCompleteBox--answerDisplay">
+                <h2>{answers[0]} - </h2>
+                <h2>{answers[1]}</h2>
+                <h2>- {answers[2]}</h2>
+            </div>
+                        
             {count < 3 &&
                 <h3>Better luck next time.</h3>
             }
             {count === 3 &&
-                <h3>Congratulations</h3>
+                <h2 className="gameCompleteBox--congrats">Congratulations{currentUser && ` ${currentUser}`}!</h2>
             }
-            <div className="gameCompleteBox--answerDisplay">
-                <h2>{answers[0]}</h2>
-                <h2>{answers[1]}</h2>
-                <h2>{answers[2]}</h2>
-            </div>
             {promptNameAndSubmit()}
             <button onClick={reset} >Play Again</button>
         </div>

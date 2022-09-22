@@ -90,7 +90,7 @@ export default function Keyboard() {
                 setCurrentRow(prevRow => prevRow + 1)
                 setCurrentGuess("")
             }
-            if (answers.findIndex(word => word === currentGuess.toUpperCase()) > -1 && gridValues.findIndex(word => word === currentGuess.toUpperCase())) {
+            if (answers.findIndex(word => word === currentGuess.toUpperCase()) > -1 && gridValues.findIndex(word => word === currentGuess.toUpperCase()) === -1) {
                         setCount(prevCount => prevCount + 1)
                         if (count === 2) {
                             // setCurrentRow(prevRow => prevRow + 1)
@@ -112,14 +112,6 @@ export default function Keyboard() {
             })
             if (currentRow === 8) {
                 setToggleGameCompleted(true)
-                if (count >= 3) {
-                    alert('grats')
-                } else if (count > 0 && count < 3) {
-                    alert('very close')
-                }
-                else {
-                    alert('better luck next time')
-                }
             }
             //if the guess is 3 letters long run this
 
@@ -133,7 +125,6 @@ export default function Keyboard() {
             handleDelete()
         }
         if (currentGuess.length < 3  && theAlphabet.findIndex(letter => letter === e.key) > -1 && count < 3) {
-            console.log('a letter was pressed')
             setCurrentGuess(prevState => prevState + e.key.toUpperCase())
         }
     }
@@ -143,6 +134,7 @@ export default function Keyboard() {
     return(
         <>
         {console.log(answers)}
+
             <table className="keyboard">
                 
                 <tbody>
@@ -192,10 +184,7 @@ export default function Keyboard() {
                     </tr>
                 </tbody>
             </table>
-            <h3>{count}</h3>
-
-
-            
+          
         </>
     )
 }

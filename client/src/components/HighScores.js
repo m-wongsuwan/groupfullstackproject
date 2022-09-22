@@ -17,7 +17,7 @@ export default function HighScores() {
     const sortedMap = sortedList.map((user, index) => {
         return (
             <li key={index}>
-                {index + 1}. {user.userName} - {user.score} Wins{toggleAdmin && <button onClick={()=> deleteUser(user._id)}>Delete</button>}
+                {index + 1}. {user.userName} - {user.score} Wins {toggleAdmin && <button onClick={()=> deleteUser(user._id)}>Delete</button>}
             </li>
         )
     })

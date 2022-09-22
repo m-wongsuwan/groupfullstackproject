@@ -7,10 +7,14 @@ import { Context } from "../context";
 
 export default function Game() {
 
-    const { toggleGameCompleted, userList, currentUser } = React.useContext(Context)
+    const { toggleGameCompleted, userList, currentUser, reset, count } = React.useContext(Context)
 
     return(
         <div className="game" >
+            <div className="userAndReset">
+                <span>{currentUser ? `Logged in as ${currentUser}` : `Not logged in` }</span>
+                <button onClick={reset} className="game--resetBtn">Reset game</button>
+            </div>
             <h1>Shortdle</h1>
             <div className="gameGridDisplay">
                 <div className="gridsContainer">
