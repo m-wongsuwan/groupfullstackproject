@@ -23,6 +23,11 @@ export default function Keyboard() {
     // if you want the keys to change color based on guesses
     const absentStyle = {backgroundColor: "rgb(55, 55, 55)"}
     const correctStyle = {backgroundColor: "rgb(79, 173, 96)"}
+
+    function doesAnyAnswerContainLetter(letter) {
+        return answers[0].indexOf(letter) > -1 || answers[1].indexOf(letter) > -1 || answers[2].indexOf(letter) > -1
+    }
+
     function keyCell(letter) {
         if (answers[0].indexOf(letter) > -1 || answers[1].indexOf(letter) > -1 || answers[2].indexOf(letter) > -1) {
             if (gridValues[0].indexOf(letter) > -1 || gridValues[1].indexOf(letter) > -1 || gridValues[2].indexOf(letter) > -1 || gridValues[3].indexOf(letter) > -1 || gridValues[4].indexOf(letter) > -1 || gridValues[5].indexOf(letter) > -1 || gridValues[6].indexOf(letter) > -1 || gridValues[7].indexOf(letter) > -1 || gridValues[8].indexOf(letter) > -1 ) {
@@ -77,8 +82,6 @@ export default function Keyboard() {
         // and the new listener has the updated value of currentGuess
         return ()=> document.removeEventListener('keydown', detectKeyDown)
     }, [currentGuess])
-
-    
     
     function handleSubmit() {
         
@@ -90,19 +93,27 @@ export default function Keyboard() {
                 setCurrentRow(prevRow => prevRow + 1)
                 setCurrentGuess("")
             }
+            // not obvious what this condition means
+            // Suggestion: If not immediately obvious write a function that can provide the condition
+            // guess appears in answers
+                // write a function named isGuessCorrect
+            // hasn't already been guessed
+                // write a function named hasBeenGuessed
             if (answers.findIndex(word => word === currentGuess.toUpperCase()) > -1 && gridValues.findIndex(word => word === currentGuess.toUpperCase()) === -1) {
-                        setCount(prevCount => prevCount + 1)
-                        if (count === 2) {
-                            // setCurrentRow(prevRow => prevRow + 1)
-                            // setCurrentGuess("")
-                            setGridValues(prevState => {
-                                const newGridValues = prevState
-                                newGridValues[currentRow] = currentGuess
-                                return newGridValues
-                            })
-                            setToggleGameCompleted(true)
-                            // return alert('Congratulations! You guessed all three words')
-                        }
+                // invoke function rather than nesting ifs
+                // easier to read and understand
+                setCount(prevCount => prevCount + 1)
+                if (count === 2) {
+                    // setCurrentRow(prevRow => prevRow + 1)
+                    // setCurrentGuess("")
+                    setGridValues(prevState => {
+                        const newGridValues = prevState
+                        newGridValues[currentRow] = currentGuess
+                        return newGridValues
+                    })
+                    setToggleGameCompleted(true)
+                    // return alert('Congratulations! You guessed all three words')
+                }
             }
             
             setGridValues(prevState => {
@@ -133,7 +144,8 @@ export default function Keyboard() {
     
     return(
         <>
-        {console.log(answers)}
+        <button onClick={()=>console.log(doesAnyAnswerContainLetter('a'))}></button>{console.log(doesAnyAnswerContainLetter)}
+
 
             <table className="keyboard">
                 
