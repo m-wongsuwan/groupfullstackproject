@@ -24,19 +24,22 @@ export default function Keyboard() {
     const absentStyle = {backgroundColor: "rgb(55, 55, 55)"}
     const correctStyle = {backgroundColor: "rgb(79, 173, 96)"}
 
-    function doesAnyAnswerContainLetter(letter) {
+    function anyAnswerContainsLetter(letter) {
         return answers[0].indexOf(letter) > -1 || answers[1].indexOf(letter) > -1 || answers[2].indexOf(letter) > -1
+    }
+    function letterAppearsInAGuess(letter){
+        return gridValues[0].indexOf(letter) > -1 || gridValues[1].indexOf(letter) > -1 || gridValues[2].indexOf(letter) > -1 || gridValues[3].indexOf(letter) > -1 || gridValues[4].indexOf(letter) > -1 || gridValues[5].indexOf(letter) > -1 || gridValues[6].indexOf(letter) > -1 || gridValues[7].indexOf(letter) > -1 || gridValues[8].indexOf(letter) > -1
     }
 
     function keyCell(letter) {
-        if (answers[0].indexOf(letter) > -1 || answers[1].indexOf(letter) > -1 || answers[2].indexOf(letter) > -1) {
-            if (gridValues[0].indexOf(letter) > -1 || gridValues[1].indexOf(letter) > -1 || gridValues[2].indexOf(letter) > -1 || gridValues[3].indexOf(letter) > -1 || gridValues[4].indexOf(letter) > -1 || gridValues[5].indexOf(letter) > -1 || gridValues[6].indexOf(letter) > -1 || gridValues[7].indexOf(letter) > -1 || gridValues[8].indexOf(letter) > -1 ) {
+        if (anyAnswerContainsLetter(letter)) {
+            if (letterAppearsInAGuess(letter)) {
                 return <td style={correctStyle} onClick={handleClick} id={letter.toLowerCase()}>{letter}</td>
             } else {
                 return <td onClick={handleClick} id={letter.toLowerCase()}>{letter}</td>
             }
         } else if (answers[0].indexOf(letter) === -1 && answers[1].indexOf(letter) === -1 && answers[2].indexOf(letter) === -1) {
-            if (gridValues[0].indexOf(letter) > -1 || gridValues[1].indexOf(letter) > -1 || gridValues[2].indexOf(letter) > -1 || gridValues[3].indexOf(letter) > -1 || gridValues[4].indexOf(letter) > -1 || gridValues[5].indexOf(letter) > -1 || gridValues[6].indexOf(letter) > -1 || gridValues[7].indexOf(letter) > -1 || gridValues[8].indexOf(letter) > -1 ) {
+            if (letterAppearsInAGuess(letter)) {
                 return <td style={absentStyle} onClick={handleClick} id={letter.toLowerCase()}>{letter}</td>
             } else {
                 return <td onClick={handleClick} id={letter.toLowerCase()}>{letter}</td>
@@ -45,22 +48,6 @@ export default function Keyboard() {
             return <td onClick={handleClick} id={letter.toLowerCase()}>{letter}</td>
         }
     }
-
-    // trying https://github.com/facebook/react/issues/15815 solution
-//     Also you can put keyPressHandler function inside useEffect body and use setTest to getting previous state not from closure, but from second form with callback.
-
-//   const [text, setText] = useState('');
- 
-//   useEffect(() => {
-//     const keyPressHandler = (e) => {
-//       setText((text) => text + e.key);
-//     };
-
-//     document.addEventListener('keydown', keyPressHandler);
-//     return () => {
-//       document.removeEventListener('keydown', keyPressHandler);
-//     };
-//   }, []);
 
     function handleClick(e) {
         if (currentGuess.length < 3 && count < 3) {
@@ -85,13 +72,19 @@ export default function Keyboard() {
     
     function handleSubmit() {
         
-        const found = wordList.findIndex(word => word === currentGuess.toLowerCase())
+        const guessIsValid = wordList.findIndex(word => word === currentGuess.toLowerCase()) > -1
+        const guessIsCorrectLength = currentGuess.length === 3
+        function advanceRowResetCurrentGuess(){
+            setCurrentRow(prevRow => prevRow + 1)
+            setCurrentGuess("")
+        }
+        const guessIsACorrectAnswerAndHasntBeenGuessed = answers.findIndex(word => word === currentGuess.toUpperCase()) > -1 && gridValues.findIndex(word => word === currentGuess.toUpperCase()) === -1
+
         // if the guess appears in word list run this
         
-        if (found > -1) {
-            if (currentGuess.length === 3) {
-                setCurrentRow(prevRow => prevRow + 1)
-                setCurrentGuess("")
+        if (guessIsValid) {
+            if (guessIsCorrectLength) {
+                advanceRowResetCurrentGuess()
             }
             // not obvious what this condition means
             // Suggestion: If not immediately obvious write a function that can provide the condition
@@ -99,7 +92,7 @@ export default function Keyboard() {
                 // write a function named isGuessCorrect
             // hasn't already been guessed
                 // write a function named hasBeenGuessed
-            if (answers.findIndex(word => word === currentGuess.toUpperCase()) > -1 && gridValues.findIndex(word => word === currentGuess.toUpperCase()) === -1) {
+            if (guessIsACorrectAnswerAndHasntBeenGuessed) {
                 // invoke function rather than nesting ifs
                 // easier to read and understand
                 setCount(prevCount => prevCount + 1)
@@ -112,7 +105,6 @@ export default function Keyboard() {
                         return newGridValues
                     })
                     setToggleGameCompleted(true)
-                    // return alert('Congratulations! You guessed all three words')
                 }
             }
             
@@ -144,7 +136,7 @@ export default function Keyboard() {
     
     return(
         <>
-        <button onClick={()=>console.log(doesAnyAnswerContainLetter('a'))}></button>{console.log(doesAnyAnswerContainLetter)}
+        <button onClick={()=>console.log('hi')}>does any answer contain letter</button>
 
 
             <table className="keyboard">
