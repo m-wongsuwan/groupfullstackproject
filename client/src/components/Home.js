@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Context } from "../context";
-
-
+import { useNavigate } from 'react-router-dom'
+    
 export default function Home() {
+    let navigate = useNavigate();
     
     const { currentUser, setCurrentUser } = React.useContext(Context)
     const [userInput, setUserInput] = useState({ userName: ""})
@@ -21,6 +22,7 @@ export default function Home() {
         e.preventDefault()
         setUserInput({ userName: userInput.userName })
         setCurrentUser(userInput.userName)
+        navigate('/game')
     }
 
     return(
@@ -44,6 +46,8 @@ export default function Home() {
                 <p>
                     Answers come from the Scrabble list of legal three-letter words.
                 </p>
+                <br />
+                <small>Tile Icon by IBM-Design on IconScout</small>
             </div>
         </div>
     )

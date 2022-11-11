@@ -136,9 +136,6 @@ export default function Keyboard() {
     
     return(
         <>
-        <button onClick={()=>console.log('hi')}>does any answer contain letter</button>
-
-
             <table className="keyboard">
                 
                 <tbody>
