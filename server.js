@@ -3,6 +3,9 @@ const app = express()
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 const path = require("path")
+require('dotenv').config()
+
+const port = process.env.PORT || 7001
 
 app.use(express.json())
 app.use(morgan('dev'))
@@ -18,4 +21,4 @@ app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "client", "build", "index.html"))
 })
 
-app.listen(7001, ()=> console.log(`Server up on port 7001`))
+app.listen(port, ()=> console.log(`Server up on port ${port}`))
