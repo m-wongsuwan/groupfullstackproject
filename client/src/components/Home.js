@@ -48,6 +48,8 @@ export default function Home() {
                 </p>
                 <br />
                 <small>Tile Icon by IBM-Design on IconScout</small>
+                <small><a href="https://iconscout.com/icons/x-circle" target="_blank">X Circle Icon</a> by <a href="https://iconscout.com/contributors/phosphoricons" target="_blank">Phosphor Icons</a></small>
+                <a href="https://iconscout.com/icons/menu" target="_blank">Menu Icon</a> by <a href="https://iconscout.com/contributors/rengised">Alex Martynov</a> on <a href="https://iconscout.com">IconScout</a>
             </div>
         </div>
     )

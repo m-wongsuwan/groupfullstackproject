@@ -60,8 +60,6 @@ export default function Keyboard() {
         setCurrentGuess(toDeleteString.slice(0, -1))
     }
 
-    // https://stackoverflow.com/questions/67537943/react-function-unaware-of-state-when-called-from-keydown-event
-    // there's a more reacty way ^^^
     useEffect(()=> {
         // this listener is made on page render and every time currentGuess changes
         document.addEventListener('keydown', detectKeyDown)
@@ -135,9 +133,8 @@ export default function Keyboard() {
     
     
     return(
-        <>
-            <table className="keyboard">
-                
+        <div className="keyboard">
+            <table className="keyboardRow">                
                 <tbody>
                     <tr>
 
@@ -151,11 +148,11 @@ export default function Keyboard() {
                         {keyCell("O")}
                         {keyCell("I")}
                         {keyCell("P")}
-
                     </tr>
                 </tbody>
             </table>
-            <table className="keyboard">
+
+            <table className="keyboardRow">
                 <tbody>
                     <tr>
                         {keyCell("A")}
@@ -170,7 +167,7 @@ export default function Keyboard() {
                     </tr>
                 </tbody>
             </table>
-            <table className="keyboard">
+            <table className="keyboardRow">
                 <tbody>
                     <tr>
                         <td onClick={handleSubmit} className="bigButtons" id="enter">ENTER</td>
@@ -186,6 +183,6 @@ export default function Keyboard() {
                 </tbody>
             </table>
           
-        </>
+        </div>
     )
 }

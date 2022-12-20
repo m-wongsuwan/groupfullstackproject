@@ -52,7 +52,7 @@ export default function GameCompleteBox() {
                 return (
                     <>
                         <form onSubmit={()=>submitToLeaderboard(userInput.userName)}>
-                            <input name="userName" placeholder="Enter Handle" value={userInput.userName} onChange={handleChange} />
+                            <input className="enterHandle" name="userName" placeholder="Enter Handle" value={userInput.userName} onChange={handleChange} />
                             <button>Submit to LeaderBoard</button>
                         </form>
                     </>
@@ -65,19 +65,22 @@ export default function GameCompleteBox() {
         <div className="gameCompleteBox">
 
             <div className="gameCompleteBox--answerDisplay">
-                <h2>{answers[0]} - </h2>
+                <h2>{answers[0]}</h2>
                 <h2>{answers[1]}</h2>
-                <h2>- {answers[2]}</h2>
+                <h2>{answers[2]}</h2>
             </div>
                         
             {count < 3 &&
-                <h3>Better luck next time.</h3>
+                <div className="gameCompleteBox--loss">
+                    <h3>Better luck next time.</h3>
+
+                </div>
             }
             {count === 3 &&
                 <h2 className="gameCompleteBox--congrats">Congratulations{currentUser && ` ${currentUser}`}!</h2>
             }
             {promptNameAndSubmit()}
-            <button onClick={reset} >Play Again</button>
+            <button onClick={reset} className="playAgainBtn">Play Again</button>
         </div>
     )
 }

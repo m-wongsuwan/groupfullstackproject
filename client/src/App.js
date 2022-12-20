@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -5,32 +6,31 @@ import {
   Route,
   Link
 } from "react-router-dom"
+//maybe as an overlay like the high scores
 import Home from './components/Home';
 import Game from './components/Game';
-// import About from './components/About';
-import HighScores from './components/HighScores';
+import Nav from './components/Nav'
+
 import { ContextProvider } from './context';
+
 
 
 function App() {
 
+  // This should come from context so the component can access it to close itself
+  const [showHighScores, setShowHighScores] = React.useState(false)
+
   return (
     <ContextProvider>
       <Router>
-        <nav>
-          <div className='navBox'>
-            <Link to='/'>Home</Link>
-            <Link to='/game'>Game</Link>
-            <Link to='/highscores'>High Scores</Link>
-            {/* <Link to='/about'>About</Link> */}
-          </div>
-        </nav>
+        <Nav />
+        {/* { showHighScores ? <HighScores /> : null} */}
 
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Game />} />
           {/* <Route path='/about' element={<About />} /> */}
-          <Route path='/game' element={<Game />} />
-          <Route path='/highscores' element={<HighScores />} />
+          {/* <Route path='/game' element={<Game />} /> */}
+          {/* <Route path='/highscores' element={<HighScores />} /> */}
         </Routes>
 
       </Router>

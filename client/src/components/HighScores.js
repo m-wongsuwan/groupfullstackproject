@@ -1,9 +1,10 @@
 import axios from "axios";
 import React from "react";
 import { Context } from "../context";
+import x from '../images/x-circle.svg'
 
 export default function HighScores() {
-    const {userList, setUserList} = React.useContext(Context)
+    const {userList, setUserList, setShowHighScores} = React.useContext(Context)
     const [toggleAdmin, setToggleAdmin] = React.useState(false)
 
     const sortedList = userList.sort((b, a) => a.score - b.score)
@@ -24,7 +25,8 @@ export default function HighScores() {
 
     return(
         <div className="highScores">
-            <h1>High Scores</h1>
+            <img onClick={()=> setShowHighScores(prev => !prev)} className="exitIcon" src={x} alt="X" />
+            <h1 className="highScoreH1">High Scores</h1>
             <div className="listDiv">
                 <ul>
                     {sortedMap}

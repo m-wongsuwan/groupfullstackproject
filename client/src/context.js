@@ -13,6 +13,10 @@ function ContextProvider(props) {
     const [toggleGameCompleted,  setToggleGameCompleted] = useState(false)
     const [userList, setUserList] = useState([])
 
+    const [showHighScores, setShowHighScores] = React.useState(false)
+    //test
+    const [testShow, setTestShow] = React.useState(false)
+
     function reset() {
         setCurrentGuess("")    
         setCurrentRow(0)
@@ -68,7 +72,9 @@ function ContextProvider(props) {
             setToggleGameCompleted,
             userList,
             setUserList,
-            reset
+            reset,
+            showHighScores,
+            setShowHighScores
         }}    
         >
             {props.children}
