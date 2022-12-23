@@ -52,6 +52,14 @@ function ContextProvider(props) {
         newAnswers()
     }, [])
 
+    function anyAnswerContainsLetter(letter) {
+        return answers[0].indexOf(letter) > -1 || answers[1].indexOf(letter) > -1 || answers[2].indexOf(letter) > -1
+    }
+
+    function letterAppearsInAGuess(letter){
+        return gridValues[0].indexOf(letter) > -1 || gridValues[1].indexOf(letter) > -1 || gridValues[2].indexOf(letter) > -1 || gridValues[3].indexOf(letter) > -1 || gridValues[4].indexOf(letter) > -1 || gridValues[5].indexOf(letter) > -1 || gridValues[6].indexOf(letter) > -1 || gridValues[7].indexOf(letter) > -1 || gridValues[8].indexOf(letter) > -1
+    }
+
 
 
     return(
@@ -78,7 +86,9 @@ function ContextProvider(props) {
             showAbout,
             setShowAbout,
             showMenu,
-            setShowMenu
+            setShowMenu,
+            anyAnswerContainsLetter,
+            letterAppearsInAGuess
         }}    
         >
             {props.children}

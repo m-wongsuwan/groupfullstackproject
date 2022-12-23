@@ -15,22 +15,20 @@ export default function Keyboard() {
         count, 
         setCount,
         setToggleGameCompleted,
-        showMenu
+        showMenu,
+        anyAnswerContainsLetter,
+        letterAppearsInAGuess
     } = React.useContext(Context)
 
 
     const theAlphabet = ['a', 'b', 'c', 'd' , 'e' , 'f' , `g` , `h` , `i` , `j` , `k` , `l` , `m` , `n` , `o` , `p` , `q` , `r` , `s` , `t` , `u` , `v` , `w` , `x` , `y` , `z`]
 
-    // if you want the keys to change color based on guesses
     const absentStyle = {backgroundColor: "rgb(55, 55, 55)"}
     const correctStyle = {backgroundColor: "rgb(79, 173, 96)"}
 
-    function anyAnswerContainsLetter(letter) {
-        return answers[0].indexOf(letter) > -1 || answers[1].indexOf(letter) > -1 || answers[2].indexOf(letter) > -1
-    }
-    function letterAppearsInAGuess(letter){
-        return gridValues[0].indexOf(letter) > -1 || gridValues[1].indexOf(letter) > -1 || gridValues[2].indexOf(letter) > -1 || gridValues[3].indexOf(letter) > -1 || gridValues[4].indexOf(letter) > -1 || gridValues[5].indexOf(letter) > -1 || gridValues[6].indexOf(letter) > -1 || gridValues[7].indexOf(letter) > -1 || gridValues[8].indexOf(letter) > -1
-    }
+    
+
+    
 
     function keyCell(letter) {
         if (anyAnswerContainsLetter(letter)) {

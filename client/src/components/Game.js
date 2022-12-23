@@ -17,6 +17,7 @@ export default function Game() {
             { showHighScores ? <HighScores /> : null}
             { showAbout ? <About /> : null}
             { showMenu ? <Menu /> : null}
+            { toggleGameCompleted ? <GameCompleteBox /> : null}
             <div className="gameGridDisplay">
                 <div className="gridsContainer">
                     <GameGrid gridNum='0' />
@@ -24,7 +25,7 @@ export default function Game() {
                     <GameGrid gridNum='2' />
                 </div>
             </div>
-            {toggleGameCompleted ? <GameCompleteBox /> : <Keyboard />}
+            <Keyboard />
         </div>
     )
 }

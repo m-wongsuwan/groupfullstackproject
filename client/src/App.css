@@ -2,6 +2,8 @@
   --background: rgb(227, 242, 253);
   --popUpBackground: rgb(92, 154, 199);
   --absentColor: rgb(163, 173, 189);
+  --correctColor: rgb(79, 173, 96);
+  --wrongPlacementStyle: rgb(245, 217, 42)
 }
 
 * {
@@ -43,9 +45,9 @@ body {
   text-align: right;
 }
 .navIcon {
-  height: 35px;
-  width: 35px;
-  margin: 5px 15px 0px;
+  height: 20px;
+  width: 20px;
+  margin: 15px 5px 0px;
   cursor: pointer;
 }
 
@@ -53,32 +55,58 @@ body {
 
 .gameCompleteBox {
   text-align: center;
-  /* color */
-  background-color: var(--absentColor);
+  background-color: var(--background);
+  position: fixed;
+  right: 50%;
+  top: 200px;
+  box-shadow: 0 0 10px black;
+  border-radius: 10px;
   /* query */
   width: 300px;
   margin: 10px auto;
-  padding: 30px;
-  border-radius: 10px;
+  padding: 9px;
+  margin-right: -150px;
 }
-.gameCompleteBox button {
-  background-color: var(background-color);
-  color: black;
-  padding: 8px;
+.playAgainBtn {
+  background-color: var(--wrongPlacementStyle);
+  color: rgb(0, 0, 0);
+  padding: 16px;
   border: none;
   border-radius: 5px;
-  font-weight: 700;;
-  /* margin: 5px */
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.submitWinForm {
+  margin: 0 0 20px;
+}
+.submitWinBtn {
+  height: 35px;
+  padding: 0 8px;
+  border-radius: 0 10px 10px 0;
+  border: none;
+  background-color: var(--correctColor);
+  cursor: pointer;
+}
+.answerTable {
+  width: 89px
+}
+.answerTable td {
+  border: 1px solid rgb(160, 158, 158);
+  height: 25px;    
+  width: 25px;
+  text-align: center;
+  border-radius: 3px;
+  font-size: 20px;
 }
 .gameCompleteBox--answerDisplay {
-  display: flex;
-  justify-content: center;
+  margin-top: 30px;
+  width: 300px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: space-between;
 }
-.gameCompleteBox--answerDisplay h2 {
-  color: rgb(227, 242, 253);
-  text-shadow: 0px 0px  10px rgb(13, 23, 38);
-  margin: 0 20px
-}
+
 .gameCompleteBox--loss, .gameCompleteBox--congrats {
   margin: 25px
 }
@@ -89,9 +117,7 @@ body {
 .enterHandle {
   height: 35px;
 }
-.playAgainBtn {
-  margin: 20px 0 0
-}
+
 .userAndReset {
   position: fixed;
   top: 77px;
@@ -282,6 +308,12 @@ footer button {
     margin: 0 auto;
     width: 550px
   }
+  .navIcon {
+    height: 35px;
+    width: 35px;
+    margin: 5px 15px 0px;
+    cursor: pointer;
+  }
 }
 
 @media only screen and (min-width: 900px) {
@@ -294,14 +326,26 @@ footer button {
     width: 50px;
   }
 
-  h2 {
+  /* h2 {
     font-size: 25px;
-  }
+  } */
   .gameCompleteBox {
     width: 600px;
+    margin-right: -300px;
+    padding: 30px;
   }
-  .gameCompleteBox--answerDisplay h2 {
-    margin: 0 50px
+  .gameCompleteBox--answerDisplay {
+    width: 540px;
+  }
+  .answerTable {
+    width: 170px;
+  }
+  .answerTable td {
+    height: 50px;
+    width: 50px;
+  }
+  .answerTable h3 {
+    line-height: 50px;
   }
   .gridsContainer {
     margin: 0 auto;

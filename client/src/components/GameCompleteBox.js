@@ -1,12 +1,33 @@
 import React, { useState } from "react";
 import { Context } from "../context";
 import axios from "axios";
+import x from '../images/x-circle-black.svg'
 
 export default function GameCompleteBox() {
 
-    const { answers, currentUser, setCurrentUser, count, userList, setUserList, reset } = React.useContext(Context)
+    const { 
+            answers, 
+            currentUser, 
+            setCurrentUser, 
+            count, 
+            userList, 
+            setUserList, 
+            reset,
+            letterAppearsInAGuess,
+            setToggleGameCompleted
+        } = React.useContext(Context)
     const [userInput, setUserInput] = useState({ userName: ""})
-    const [finishedSubmit, setFinishedSubmit] = useState(false)
+
+    const absentStyle = {backgroundColor: "rgb(163, 173, 189)"}
+    const correctStyle = {backgroundColor: "rgb(79, 173, 96)"}
+
+    function returnStyle(letter) {
+        if (letterAppearsInAGuess(letter)) {
+            return correctStyle
+        } else {
+            return absentStyle
+        }
+    }
 
 
     function handleChange(e) {
@@ -51,9 +72,9 @@ export default function GameCompleteBox() {
             } else {
                 return (
                     <>
-                        <form onSubmit={()=>submitToLeaderboard(userInput.userName)}>
+                        <form className="submitWinForm" onSubmit={()=>submitToLeaderboard(userInput.userName)}>
                             <input className="enterHandle" name="userName" placeholder="Enter Handle" value={userInput.userName} onChange={handleChange} />
-                            <button>Submit to LeaderBoard</button>
+                            <button className="submitWinBtn">Submit to LeaderBoard</button>
                         </form>
                     </>
                 )
@@ -63,11 +84,34 @@ export default function GameCompleteBox() {
 
     return(
         <div className="gameCompleteBox">
+            <img onClick={()=> setToggleGameCompleted(prev => !prev)} className="exitIcon" src={x} alt="X" />
 
             <div className="gameCompleteBox--answerDisplay">
-                <h2>{answers[0]}</h2>
-                <h2>{answers[1]}</h2>
-                <h2>{answers[2]}</h2>
+                <table className="answerTable">
+                    <trow>
+                        <td style={returnStyle(answers[0][0])} ><h3>{answers[0][0]}</h3></td>
+                        <td style={returnStyle(answers[0][1])} ><h3>{answers[0][1]}</h3></td>
+                        <td style={returnStyle(answers[0][2])} ><h3>{answers[0][2]}</h3></td>
+                    </trow>
+                </table>
+                
+                <table className="answerTable">
+                    <trow>
+                        <td style={returnStyle(answers[1][0])} ><h3>{answers[1][0]}</h3></td>
+                        <td style={returnStyle(answers[1][1])} ><h3>{answers[1][1]}</h3></td>
+                        <td style={returnStyle(answers[1][2])} ><h3>{answers[1][2]}</h3></td>
+
+                    </trow>
+                </table>
+
+                <table className="answerTable">
+                    <trow>
+                        <td style={returnStyle(answers[2][0])} ><h3>{answers[2][0]}</h3></td>
+                        <td style={returnStyle(answers[2][1])} ><h3>{answers[2][1]}</h3></td>
+                        <td style={returnStyle(answers[2][2])} ><h3>{answers[2][2]}</h3></td>
+
+                    </trow>
+                </table>
             </div>
                         
             {count < 3 &&
@@ -77,7 +121,7 @@ export default function GameCompleteBox() {
                 </div>
             }
             {count === 3 &&
-                <h2 className="gameCompleteBox--congrats">Congratulations{currentUser && ` ${currentUser}`}!</h2>
+                <h3 className="gameCompleteBox--congrats">Congratulations{currentUser && ` ${currentUser}`}!</h3>
             }
             {promptNameAndSubmit()}
             <button onClick={reset} className="playAgainBtn">Play Again</button>
