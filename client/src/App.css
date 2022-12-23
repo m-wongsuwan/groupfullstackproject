@@ -1,90 +1,60 @@
+:root {
+  --background: rgb(227, 242, 253);
+  --popUpBackground: rgb(92, 154, 199);
+  --absentColor: rgb(163, 173, 189);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
+  font-family: Helvetica, Arial, sans-serif;
 }
 body {
-  background-color: rgb(16, 46, 74);
+  background-color: var(--background);
 }
-nav {
-  color: white;
-  font-family: Arial, Helvetica, sans-serif;
+.game {
+  margin-top: 87px;
 }
-nav a {
-  color: white;
-  text-decoration: none;
-  font-size: 33px;
-  font-weight: bold;
-  color: rgb(13, 23, 38)
+.popUpH1 {
+  margin: -20px -20px 10px;
+}
+.siteTitle {
+  /* text-align: center; */
+  color: black;
+  font-size: 40px;
+  letter-spacing: -4px;
 }
 .navBox {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   padding: 10px;
-  box-shadow: 0 0 10px white;
-  background-color: rgb(227, 242, 253)
+  border-bottom: 2px solid black;
+  background-color: var(--background)
+}
+.navLeft {
+  display: flex;
 }
 .navRight {
   text-align: right;
 }
-
-.home form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 30px 0px
-}
-.home form input, .home form button{
-  height: 60px;
-}
-.home form input {
-  font-size: 30px;
-  text-align: center;
-  border-radius: 10px 0px 0px 10px;
-}
-.home form button {
-  width: 100px;
-  font-size: 20px;
-  border-radius: 0px 10px 10px 0px;
-}
-.about {
-  background-color: rgb(208, 213, 221);
-  width: 70%;
-  margin: 15px auto;
-  padding: 20px;
-  border-radius: 10px;
-  font-weight: 700;
+.navIcon {
+  height: 35px;
+  width: 35px;
+  margin: 5px 15px 0px;
+  cursor: pointer;
 }
 
-.siteTitle {
-  color: black;
-  font-size: 50px;
-}
-h1, h2 {
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
-}
-.highScoreH1 {
-  color: white;
-  /* text-shadow: 0px 0px  5px rgb(163, 173, 189); */
-  /* font-size: 60px; */
-  margin: 20px auto 0px;
-  letter-spacing: .3rem;
-}
-.home h2 {
-  color: rgb(227, 242, 253);
-}
-/* query */
-h2 {
-  font-size: 20px;
-}
-.home {
-  text-align: center;
-}
+
+
 .gameCompleteBox {
   text-align: center;
-  background-color: rgb(160, 158, 158);
+  /* color */
+  background-color: var(--absentColor);
   /* query */
   width: 300px;
   margin: 10px auto;
@@ -92,9 +62,12 @@ h2 {
   border-radius: 10px;
 }
 .gameCompleteBox button {
-  background-color: rgb(16, 46, 74);
-  color: rgb(227, 242, 253);
+  background-color: var(background-color);
+  color: black;
   padding: 8px;
+  border: none;
+  border-radius: 5px;
+  font-weight: 700;;
   /* margin: 5px */
 }
 .gameCompleteBox--answerDisplay {
@@ -120,15 +93,14 @@ h2 {
   margin: 20px 0 0
 }
 .userAndReset {
+  position: fixed;
+  top: 77px;
   right: 0;
   text-align: right;
 }
-.userAndReset span {
-  color: white
-}
 .game .game--resetBtn {
   margin: 5px;
-  background-color: rgb(227, 242, 253);
+  background-color: whie;
   padding: 7px;
   border: 3px solid rgb(78, 78, 78);
   border-radius: 5px;
@@ -138,7 +110,7 @@ h2 {
   margin-left: auto;
   margin-right: auto;
   align-items: center;
-  width: 80%;
+  width: 95%;
   border-spacing: 5px;
   text-align: center;
 }
@@ -153,8 +125,7 @@ h2 {
   width: 100%;
 }  
 .grids {
-  width: 80%;
-  margin: 20px auto;
+  margin: 0px auto 20px;
   table-layout: fixed;
 }
 
@@ -164,12 +135,13 @@ h2 {
   margin: 0 auto
 }
 .grids td {
-  border: 3px solid rgb(160, 158, 158);
-  height: 40px;    
-  max-width: 100px;
+  background-color: white;
+  border: 1px solid rgb(160, 158, 158);
+  height: 30px;    
+  width: 30px;
   margin: 10px;
   text-align: center;
-  border-radius: 7px;
+  border-radius: 3px;
   font-size: 20px;
 }
 
@@ -185,19 +157,63 @@ h2 {
   border-radius: 6px;
   color: white;
 }
-
-.highScores {
+.infoPopUp {
+  background-color: var(--background);
   position: fixed;
   right: 50%;
-  margin-right: -175px;
   top: 100px;
-  background-color: rgb(46, 89, 168);
-  width: 350px;
   text-align: center;
   box-shadow: 0 0 10px black;
   border-radius: 10px;
   padding: 45px 15px 15px;
+  margin-right: -175px;
+  width: 350px;
 }
+/* .about {
+  background-color: white;
+  border: 10px solid var(--popUpBackground);
+}
+.highScores {
+  background-color: var(--popUpBackground);
+} */
+.highScoreH1 {
+  letter-spacing: .3rem;
+}
+.menu {
+  position: fixed;
+  text-align: center;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  padding: 15px 10px;
+  top: 67px;
+  left: 0px;
+  background-color: white;
+  width: 350px;
+}
+.portfolioBtn {
+  background-color: var(--background);
+  border: 2px solid black;
+  border-radius: 4px;
+  color: black;
+  font-weight: 700;
+  font-size: 20px;
+  padding: 20px;
+  cursor: pointer;
+}
+.menu h2 {
+  text-align: center;
+}
+
+.portrait {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px #000 dashed;
+  position: relative;
+  margin: 10px auto
+}
+
 .exitIcon {
   position: absolute;
   top: 10px;
@@ -209,8 +225,9 @@ h2 {
 
 .listDiv {
   width: 300px;
-  margin: 30px auto;
-  background-color: white;
+  /* margin: 30px auto; */
+  margin-bottom: 30px;
+  /* background-color: white; */
   text-align: center;
   list-style: none;
   border-radius: 5px;
@@ -249,6 +266,22 @@ footer button {
     height: 40px;
     width: 60px;
   }
+  .about {
+    margin-right: -250px;
+    width: 500px
+  }
+  .highScores {
+    margin-right: -175px;
+    width: 350px;
+  }
+  .grids td {
+    height: 40px;    
+    width: 40px;
+  }
+  .gridsContainer {
+    margin: 0 auto;
+    width: 550px
+  }
 }
 
 @media only screen and (min-width: 900px) {
@@ -256,9 +289,11 @@ footer button {
     height: 50px;
     width: 70px;
   }
-  .game h1 {
-    margin: -10px
+  .grids td {
+    height: 50px;    
+    width: 50px;
   }
+
   h2 {
     font-size: 25px;
   }
@@ -268,12 +303,24 @@ footer button {
   .gameCompleteBox--answerDisplay h2 {
     margin: 0 50px
   }
+  .gridsContainer {
+    margin: 0 auto;
+    width: 550px
+  }
+  .userAndReset {
+    position: relative;
+    top: 10px;
+    right: 10px;
+  }
+  .siteTitle {
+    margin-left: 20px;
+  }
 }
 @media only screen and (min-width: 1200px) {
   .keyboardRow td {
     width: 80px;
   }
-  .game h1 {
-    margin: -20px -20px 5px;
+  .siteTitle {
+    text-align: left;
   }
 }

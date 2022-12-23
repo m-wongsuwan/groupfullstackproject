@@ -14,7 +14,8 @@ export default function Keyboard() {
         wordList, 
         count, 
         setCount,
-        setToggleGameCompleted
+        setToggleGameCompleted,
+        showMenu
     } = React.useContext(Context)
 
 
@@ -119,14 +120,16 @@ export default function Keyboard() {
         }
     }
     const detectKeyDown = (e) => {
-        if (e.key === 'Enter') {
-            handleSubmit()
-        }
-        if ( e.key === 'Backspace') {
-            handleDelete()
-        }
-        if (currentGuess.length < 3  && theAlphabet.findIndex(letter => letter === e.key) > -1 && count < 3) {
-            setCurrentGuess(prevState => prevState + e.key.toUpperCase())
+        if (!showMenu) {
+            if (e.key === 'Enter') {
+                handleSubmit()
+            }
+            if ( e.key === 'Backspace') {
+                handleDelete()
+            }
+            if (currentGuess.length < 3  && theAlphabet.findIndex(letter => letter === e.key) > -1 && count < 3) {
+                setCurrentGuess(prevState => prevState + e.key.toUpperCase())
+            }
         }
     }
 

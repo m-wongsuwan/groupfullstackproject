@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { Context } from "../context";
-import x from '../images/x-circle.svg'
+import x from '../images/x-circle-black.svg'
 
 export default function HighScores() {
     const {userList, setUserList, setShowHighScores} = React.useContext(Context)
@@ -24,9 +24,9 @@ export default function HighScores() {
     })
 
     return(
-        <div className="highScores">
+        <div className="highScores infoPopUp">
             <img onClick={()=> setShowHighScores(prev => !prev)} className="exitIcon" src={x} alt="X" />
-            <h1 className="highScoreH1">High Scores</h1>
+            <h1 className="highScoreH1 popUpH1">High Scores</h1>
             <div className="listDiv">
                 <ul>
                     {sortedMap}

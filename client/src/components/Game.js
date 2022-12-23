@@ -4,19 +4,19 @@ import Keyboard from "./Keyboard";
 import GameCompleteBox from "./GameCompleteBox";
 import { Context } from "../context";
 import HighScores from "./HighScores";
+import About from "./About";
+import Menu from "./Menu"
 
 
 export default function Game() {
 
-    const { toggleGameCompleted, currentUser, reset, showHighScores } = React.useContext(Context)
+    const { toggleGameCompleted, showHighScores, showAbout, showMenu } = React.useContext(Context)
 
     return(
         <div className="game" >
-            { !showHighScores ? <HighScores /> : null}
-            <div className="userAndReset">
-                <span>{currentUser ? `Logged in as ${currentUser}` : `Not logged in` }</span>
-                <button onClick={reset} className="game--resetBtn">Reset game</button>
-            </div>
+            { showHighScores ? <HighScores /> : null}
+            { showAbout ? <About /> : null}
+            { showMenu ? <Menu /> : null}
             <div className="gameGridDisplay">
                 <div className="gridsContainer">
                     <GameGrid gridNum='0' />

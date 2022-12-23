@@ -43,9 +43,9 @@ export default function GameGrid(props) {
                 return <td style={wrongPlacementStyle}>{gridValues[rowNum][colNum]}</td>
             }
         } else if (currentRow === rowNum) {
-            return <td style={{backgroundColor: "rgb(227, 242, 253)"}}>{currentGuess[colNum]}</td>
+            return <td>{currentGuess[colNum]}</td>
         } else {
-            return <td style={{backgroundColor: "rgb(227, 242, 253)"}}>{gridValues[rowNum][colNum]}</td>
+            return <td>{gridValues[rowNum][colNum]}</td>
         }
     }
 
