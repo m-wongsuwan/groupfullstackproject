@@ -27,16 +27,18 @@ export default function HighScores() {
         <div className="highScores infoPopUp">
             <img onClick={()=> setShowHighScores(prev => !prev)} className="exitIcon" src={x} alt="X" />
             <h1 className="highScoreH1 popUpH1">High Scores</h1>
-            <div className="listDiv">
-                <ul>
+            <div className="highScores--listDiv">
+                <ul className="highScores--list">
                     {sortedMap}
                 </ul>
             </div>
-            <footer>
-                <button onClick={()=> setToggleAdmin(prev => !prev)} >
-                    Admin Controls
-                </button>    
-            </footer>
+            <div className="highScores--adminControls">
+                <button className="highScores--adminControlsToggleBtn" onClick={()=> setToggleAdmin(prev => !prev)} >
+                    Delete Entries*
+                </button> 
+                <br />   
+                <small>*Obviously, giving any user the ability to delete entries is not good practice, but the main goal of this project at conception was to demonstrate CRUD capabilities.</small>
+            </div>
         </div>
     )
 }

@@ -12,6 +12,7 @@ export default function GameCompleteBox() {
             count, 
             userList, 
             setUserList, 
+            setCurrentGuess,
             reset,
             letterAppearsInAGuess,
             setToggleGameCompleted
@@ -66,7 +67,9 @@ export default function GameCompleteBox() {
             if (currentUser) {
                 return (
                     <>
-                        <button onClick={()=> submitToLeaderboard(currentUser)}>Submit Win to Leaderboard</button>
+                        <button className="submitWinBtn" onClick={()=> submitToLeaderboard(currentUser)}>Submit Win to Leaderboard</button>
+                        <br />
+                        <br />
                     </>
                 )
             } else {
@@ -85,6 +88,13 @@ export default function GameCompleteBox() {
     return(
         <div className="gameCompleteBox">
             <img onClick={()=> setToggleGameCompleted(prev => !prev)} className="exitIcon" src={x} alt="X" />
+
+            {count < 3 &&
+                    <h3 className="gameCompleteBox--result">Better luck next time.</h3>
+            }
+            {count === 3 &&
+                <h3 className="gameCompleteBox--result">Congratulations{currentUser && ` ${currentUser}`}!</h3>
+            }
 
             <div className="gameCompleteBox--answerDisplay">
                 <table className="answerTable">
@@ -114,15 +124,7 @@ export default function GameCompleteBox() {
                 </table>
             </div>
                         
-            {count < 3 &&
-                <div className="gameCompleteBox--loss">
-                    <h3>Better luck next time.</h3>
 
-                </div>
-            }
-            {count === 3 &&
-                <h3 className="gameCompleteBox--congrats">Congratulations{currentUser && ` ${currentUser}`}!</h3>
-            }
             {promptNameAndSubmit()}
             <button onClick={reset} className="playAgainBtn">Play Again</button>
         </div>

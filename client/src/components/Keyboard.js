@@ -20,16 +20,11 @@ export default function Keyboard() {
         letterAppearsInAGuess
     } = React.useContext(Context)
 
-
     const theAlphabet = ['a', 'b', 'c', 'd' , 'e' , 'f' , `g` , `h` , `i` , `j` , `k` , `l` , `m` , `n` , `o` , `p` , `q` , `r` , `s` , `t` , `u` , `v` , `w` , `x` , `y` , `z`]
 
     const absentStyle = {backgroundColor: "rgb(55, 55, 55)"}
     const correctStyle = {backgroundColor: "rgb(79, 173, 96)"}
-
     
-
-    
-
     function keyCell(letter) {
         if (anyAnswerContainsLetter(letter)) {
             if (letterAppearsInAGuess(letter)) {
@@ -65,31 +60,25 @@ export default function Keyboard() {
         // by including the next line of code, the duplicate listener is deleted
         // and the new listener has the updated value of currentGuess
         return ()=> document.removeEventListener('keydown', detectKeyDown)
-    }, [currentGuess])
+    }, [currentGuess, wordList])
     
     function handleSubmit() {
-        
         const guessIsValid = wordList.findIndex(word => word === currentGuess.toLowerCase()) > -1
         const guessIsCorrectLength = currentGuess.length === 3
         function advanceRowResetCurrentGuess(){
             setCurrentRow(prevRow => prevRow + 1)
             setCurrentGuess("")
         }
-        const guessIsACorrectAnswerAndHasntBeenGuessed = answers.findIndex(word => word === currentGuess.toUpperCase()) > -1 && gridValues.findIndex(word => word === currentGuess.toUpperCase()) === -1
 
+        const isCorrect = answers.findIndex(word => word === currentGuess.toUpperCase()) > -1
+        const notYetGuessed = gridValues.findIndex(word => word === currentGuess.toUpperCase()) === -1
         // if the guess appears in word list run this
         
         if (guessIsValid) {
             if (guessIsCorrectLength) {
                 advanceRowResetCurrentGuess()
             }
-            // not obvious what this condition means
-            // Suggestion: If not immediately obvious write a function that can provide the condition
-            // guess appears in answers
-                // write a function named isGuessCorrect
-            // hasn't already been guessed
-                // write a function named hasBeenGuessed
-            if (guessIsACorrectAnswerAndHasntBeenGuessed) {
+            if (isCorrect && notYetGuessed) {
                 // invoke function rather than nesting ifs
                 // easier to read and understand
                 setCount(prevCount => prevCount + 1)
@@ -179,7 +168,7 @@ export default function Keyboard() {
                         {keyCell("B")}
                         {keyCell("N")}
                         {keyCell("M")}
-                        <td onClick={handleDelete} className="bigButtons" id="delete">DELETE</td>
+                        <td onClick={handleDelete} className="bigButtons" id="deleteKey">DELETE</td>
                     </tr>
                 </tbody>
             </table>
