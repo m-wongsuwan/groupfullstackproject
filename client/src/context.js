@@ -16,6 +16,7 @@ function ContextProvider(props) {
     const [showHighScores, setShowHighScores] = useState(false)
     const [showAbout, setShowAbout] = useState(false)
     const [showMenu, setShowMenu] = useState(false)
+    const [showExplainer, setShowExplainer] = useState(true)
 
     function reset() {
         setCurrentGuess("")    
@@ -88,7 +89,9 @@ function ContextProvider(props) {
             showMenu,
             setShowMenu,
             anyAnswerContainsLetter,
-            letterAppearsInAGuess
+            letterAppearsInAGuess,
+            showExplainer,
+            setShowExplainer
         }}    
         >
             {props.children}

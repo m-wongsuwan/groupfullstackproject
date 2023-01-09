@@ -229,6 +229,11 @@ body {
   cursor: pointer;
   margin-bottom: 10px;
 }
+/* explainer */
+.explainer {
+  top: 200px;
+}
+
 /* menu */
 .menu {
   position: fixed;

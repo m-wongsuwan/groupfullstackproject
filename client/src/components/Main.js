@@ -6,14 +6,15 @@ import { Context } from "../context";
 import HighScores from "./HighScores";
 import About from "./About";
 import Menu from "./Menu"
+import Explainer from "./Explainer";
 
+export default function Main() {
 
-export default function Game() {
-
-    const { toggleGameCompleted, showHighScores, showAbout, showMenu } = React.useContext(Context)
+    const { toggleGameCompleted, showHighScores, showAbout, showExplainer, showMenu } = React.useContext(Context)
 
     return(
         <div className="game" >
+            { showExplainer ? <Explainer /> : null}
             { showHighScores ? <HighScores /> : null}
             { showAbout ? <About /> : null}
             { showMenu ? <Menu /> : null}

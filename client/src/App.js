@@ -5,7 +5,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom"
-import Game from './components/Game';
+import Main from './components/Main';
 import Nav from './components/Nav'
 
 import { ContextProvider } from './context';
@@ -19,7 +19,7 @@ function App() {
       <Router>
         <Nav />
         <Routes>
-          <Route path='/' element={<Game />} />
+          <Route path='/' element={<Main />} />
         </Routes>
 
       </Router>
